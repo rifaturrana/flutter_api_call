@@ -18,10 +18,11 @@ class PostsController extends GetxController {
       var dio = Dio();
       var response = await dio
           .get('https://jsonplaceholder.typicode.com/posts?userId=$userId');
+
       for (var post in response.data) {
         postList.add(Posts.fromJson(post));
-        postList.sort((a, b) => a.title!.length.compareTo(b.title!.length));
       }
+      postList.sort((a, b) => a.title!.length.compareTo(b.title!.length));
     } catch (e) {
       print(e);
     }
@@ -33,5 +34,10 @@ class PostsController extends GetxController {
   void onInit() {
     super.onInit();
     fetchPosts();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
   }
 }

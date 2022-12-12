@@ -35,7 +35,7 @@ class _UserListState extends State<UserList> {
                           for (var user in userContorller.userList)
                             InkWell(
                               onTap: (() {
-                                Get.to(PostList(), arguments: user);
+                                Get.to(() => PostList(), arguments: user);
                               }),
                               child: Container(
                                   margin: EdgeInsets.only(top: 10),

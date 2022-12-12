@@ -21,6 +21,9 @@ class _PostState extends State<Post> {
       for (var post in response.data) {
         postList.add(Posts.fromJson(post));
       }
+
+      //sort postList by title length in ascending order
+      postList.sort((a, b) => a.title!.length.compareTo(b.title!.length));
       print(postList);
     } catch (e) {
       print(e);
