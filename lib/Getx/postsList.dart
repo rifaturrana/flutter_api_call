@@ -1,5 +1,3 @@
-import 'dart:js_util';
-
 import 'package:dio_project/controllers/postsController.dart';
 
 import 'package:flutter/material.dart';
@@ -62,6 +60,7 @@ class _PostListState extends State<PostList> {
                                     ),
                                     Container(
                                       margin: EdgeInsets.only(top: 10),
+                                      alignment: Alignment.topLeft,
                                       child: Text(
                                         post.body!,
                                         style: TextStyle(

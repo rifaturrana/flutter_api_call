@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:dio_project/Getx/postsList.dart';
 import 'package:dio_project/model/users.dart';
 import 'package:get/get.dart';
 
@@ -19,10 +20,12 @@ class PostsController extends GetxController {
           .get('https://jsonplaceholder.typicode.com/posts?userId=$userId');
       for (var post in response.data) {
         postList.add(Posts.fromJson(post));
+        postList.sort((a, b) => a.title!.length.compareTo(b.title!.length));
       }
     } catch (e) {
       print(e);
     }
+
     return postList;
   }
 
