@@ -1,3 +1,5 @@
+import 'dart:js_util';
+
 import 'package:dio_project/controllers/postsController.dart';
 
 import 'package:flutter/material.dart';
@@ -14,6 +16,15 @@ class _PostListState extends State<PostList> {
   final PostsController postsController = PostsController();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      postsController.fetchPosts();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:
@@ -28,56 +39,41 @@ class _PostListState extends State<PostList> {
                     children: [
                       for (var post in postsController.postList)
                         Container(
-                          margin: EdgeInsets.only(top: 10),
+                          width: MediaQuery.of(context).size.width,
+                          // margin: const EdgeInsets.only(top: 10),
                           child: Column(
                             children: [
                               Container(
-                                padding: EdgeInsets.all(5),
-                                // color: Colors.grey,
-                                child: Row(children: [
-                                  Container(
-                                    width: 50,
-                                    height: 50,
-                                    child: Icon(Icons.person),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.red,
+                                margin: EdgeInsets.only(top: 10),
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(top: 10),
+                                      child: Text(
+                                        post.title!,
+                                        style: TextStyle(
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    post.title.toString(),
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ]),
-                              ),
-                              Container(
-                                padding: EdgeInsets.all(5),
-                                // color: Colors.grey,
-                                child: Row(children: [
-                                  Container(
-                                    width: 50,
-                                    height: 50,
-                                    child: Icon(Icons.person),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.red,
+                                    Container(
+                                      margin: EdgeInsets.only(top: 10),
+                                      child: Text(
+                                        post.body!,
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.normal),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    post.body.toString(),
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ]),
+                                    Divider(
+                                      color: Colors.grey,
+                                    )
+                                  ],
+                                ),
                               ),
                             ],
                           ),

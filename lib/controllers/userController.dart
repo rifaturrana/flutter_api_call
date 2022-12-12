@@ -7,11 +7,17 @@ class UserContorller extends GetxController {
   final userList = <User>[].obs;
 
   Future<List<User>> fetchUsers() async {
-    var dio = Dio();
-    var response = await dio.get('https://jsonplaceholder.typicode.com/users');
-    for (var user in response.data) {
-      userList.add(User.fromJson(user));
+    try {
+      var dio = Dio();
+      var response =
+          await dio.get('https://jsonplaceholder.typicode.com/users');
+      for (var user in response.data) {
+        userList.add(User.fromJson(user));
+      }
+    } catch (e) {
+      print(e);
     }
+
     return userList;
   }
 

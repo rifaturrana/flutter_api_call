@@ -1,5 +1,6 @@
+import 'package:dio_project/Getx/userList.dart';
 import 'package:dio_project/myApp.dart';
-import 'package:dio_project/GetX/userList.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

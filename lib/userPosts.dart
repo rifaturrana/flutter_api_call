@@ -14,11 +14,18 @@ class Post extends StatefulWidget {
 class _PostState extends State<Post> {
   List<Posts> postList = [];
   Future<List<Posts>> fetchPosts() async {
-    var response = await Dio().get(
-        'https://jsonplaceholder.typicode.com/posts?userId=${widget.userId}');
-    for (var p in response.data) {
-      postList.add(Posts.fromJson(p));
+    try {
+      var dio = Dio();
+      var response = await dio.get(
+          'https://jsonplaceholder.typicode.com/posts?userId=${widget.userId}');
+      for (var post in response.data) {
+        postList.add(Posts.fromJson(post));
+      }
+      print(postList);
+    } catch (e) {
+      print(e);
     }
+
     return postList;
   }
 

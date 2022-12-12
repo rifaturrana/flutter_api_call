@@ -5,21 +5,24 @@ import 'package:get/get.dart';
 import 'package:dio_project/model/posts.dart';
 
 class PostsController extends GetxController {
-  User user = Get.arguments;
-  late int? userId = user.id;
-  late RxString username = user.name!.obs;
+  User singleUser = Get.arguments;
+  late int userId = singleUser.id!;
+  late RxString username = singleUser.name!.obs;
   static PostsController get to => Get.find();
 
   final postList = <Posts>[].obs;
 
   Future<List<Posts>> fetchPosts() async {
-    var response = await Dio()
-        .get("https://jsonplaceholder.typicode.com/posts?userId=$userId");
-    for (var p in response.data) {
-      postList.add(Posts.fromJson(p));
+    try {
+      var dio = Dio();
+      var response = await dio
+          .get('https://jsonplaceholder.typicode.com/posts?userId=$userId');
+      for (var post in response.data) {
+        postList.add(Posts.fromJson(post));
+      }
+    } catch (e) {
+      print(e);
     }
-    print(postList);
-
     return postList;
   }
 
