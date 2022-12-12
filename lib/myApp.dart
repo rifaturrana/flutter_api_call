@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_project/model/users.dart';
 import 'package:dio_project/userPosts.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -44,11 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
               for (var user in userList)
                 InkWell(
                   onTap: (() {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Post(
-                                userId: user.id!, name: user.name.toString())));
+                    Get.to(Post(userId: user.id!, name: user.name!));
                   }),
                   child: Container(
                       margin: EdgeInsets.only(top: 10),
