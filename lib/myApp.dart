@@ -24,6 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
       for (var user in response.data) {
         userList.add(User.fromJson(user));
       }
+      setState(() {});
     } catch (e) {
       print(e);
     }
